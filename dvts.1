@@ -1,0 +1,33 @@
+.TH DVTS 1 "2001 June 19"
+.UC 4
+.SH NAME
+dvts \- Digital Video Transport System
+.SH DESCRIPTION
+.I dvts is a package of DV/RTP. dvts consists of the following programs:
+.TP
+.BI dvsend
+Receive DV/IEEE1394 packets and send RTP/DV packets.
+.TP
+.BI dvrecv
+Receive DV/RTP packets and send DV/IEEE1394 packets.
+.TP
+.BI dvsave
+Save DV/IEEE1394 data into a file.
+.TP
+.BI dvplay
+Display the saved DV data using the IEEE1394 device. Used for testing the firewire kernel patch.
+.TP
+.BI xdvshow
+Display DV/RTP, DV/IEEE1394 video. (under construction)
+.PP
+.SH BUGS
+If you find a bug, please send a e-mail to akimichi@sfc.wide.ad.jp.
+Thank you very much.
+.SH AUTHORS
+Copyright (c) 1999-2003 WIDE Project(http://www.wide.ad.jp/).
+.br
+.I dvts
+was written by Akimichi OGAWA of Keio university, JAPAN.
+DVTS home page (http://www.sfc.wide.ad.jp/DVTS/)
+.SH SEE ALSO
+dvsend(1), dvsave(1), dvplay(1), xdvshow(1)

@@ -1,0 +1,107 @@
+.TH DVSEND 1 "2001 June 19"
+.UC 4
+.SH NAME
+dvsend \- Send DV/RTP packets
+.SH SYNOPSIS
+.B dvsend
+[
+.I -v64NLH
+] [
+.I -h hostname
+] [
+.I -f rate
+] [
+.I -M ifname
+] [
+.I -t ttl
+] [
+.I -I 1394if
+] [
+.I -P port
+] [
+.I -s number
+] [
+.I -d port
+]
+.br
+.SH DESCRIPTION
+.I dvsend
+is part of the DVTS(Digital Video Transport System).
+.I dsend
+receives DV/IEEE1394 packets and sends DV/RTP packets.
+.SH OPTIONS
+The options are as follows:
+.TP
+.BI \-v
+Show version number of
+.I dsend
+.TP
+.BI \-6 
+Use IPv6 for sending DV/RTP packets. (default)
+.TP
+.BI \-4
+Use IPv4 for sending DV/RTP packets.
+.TP
+.BI \-L
+Show the packet loss state at the receivers. Packet loss information at the receivers are sent to the dvsend using RTCP. By using this option, the packet loss information gained from the RTCP RR messages are displayed.
+.TP
+.BI \-H
+Show the help message.
+.TP
+.BI \-h " hostname"
+Send DV/RTP packets to "hostname".
+.br
+Example) dvsend -h ff02::1
+.br
+         dvsend -h 10.0.0.10
+.br
+         dvsend -h dest.domain.mydomain
+.TP
+.BI \-f " rate"
+Send reduced picture frame DV/RTP stream. The DV/RTP stream will be sent by the rate of 1/"rate".
+.br
+Example) dvsend -h dest.domain.mydomain -f 2
+         (Half rate video)
+.TP
+.BI \-M " ifname"
+Use interface "ifname" for sending multicast packets.
+.br
+Example) dvsend -h 239.100.100.100 -M fxp0
+.TP
+.BI \-t " ttl"
+TTL for multicast packets. (default value is 1).
+Example) dvsend -h 239.100.100.100 -M fxp0 -t 20
+.TP
+.BI \-I " 1394if"
+Use device "1394if" for IEEE1394 output. (default value is "ohci0").
+.br
+Example) dvrecv -I ohci0
+.TP
+.BI \-P " port"
+Use port for sending DV/RTP packets. (default value is 8000).
+.br
+Example) dvsend -P 8100
+.TP
+.BI \-s " number"
+Pack multiple DV DIF blocks in one DV/RTP packet.
+DV data consists of multiple 80 byte long DIF blocks.
+Using large "-s number" will decrease number of DV/RTP packets, and decrease routing table lookup cost at the routers.
+(default value is 17).
+.br
+Example) dvsend -h dest.domain.mydomain -s 17
+.TP
+.BI \-d " port"
+Send DV audio data using different UDP port. (default disabled).
+Example) dvsend -h dest.domain.mydomain -d 8030
+.PP
+.SH BUGS
+If you find a bug, please send a e-mail to akimichi@sfc.wide.ad.jp.
+Thank you very much.
+.SH AUTHORS
+Copyright (c) 1999-2003 WIDE Project(http://www.wide.ad.jp/).
+.br
+.I dvsend
+was written by Akimichi OGAWA of Keio university, JAPAN.
+DVTS home page (http://www.sfc.wide.ad.jp/DVTS/)
+.SH SEE ALSO
+dvts(1), dvsend(1), dvsave(1), dvplay(1)

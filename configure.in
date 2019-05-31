@@ -1,0 +1,207 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(dvsend/main.c)
+
+dnl -----------------------------------------
+dnl Additional sourcefiles for each directory
+dnl -----------------------------------------
+DVSEND_SRC=""
+DVRECV_SRC=""
+DVSAVE_SRC=""
+DVPLAY_SRC=""
+
+AC_PROG_CC
+AC_HEADER_STDC
+AC_CHECK_HEADERS(fcntl.h strings.h sys/ioctl.h sys/time.h unistd.h)
+AC_HEADER_TIME
+AC_PROG_GCC_TRADITIONAL
+AC_TYPE_SIGNAL
+AC_CHECK_FUNCS(gettimeofday socket getnameinfo)
+AC_PROG_RANLIB
+
+AC_PROG_CC_WARNINGS()
+
+# Check for libraries.
+AC_CHECK_LIB(socket, main)
+AC_CHECK_LIB(nsl, main)
+
+# Check for IPv6 support.
+AC_DVTS_CHECK_INET6
+
+AC_PROG_MAKE_SET
+
+AM_INIT_AUTOMAKE(dvts, 1.0a)
+AM_CONFIG_HEADER(include/dvts-config.h)
+AM_MAINTAINER_MODE
+
+AC_ARG_ENABLE(pal,
+		[  --enable-pal		use PAL video],
+              [
+                CFLAGS="-DPAL $CFLAGS"
+		echo " + Enable PAL format"
+              ])
+
+AC_ARG_ENABLE(canopus,
+		[  --enable-canopus	use CANOPUS Media Converter (for freebsd4)],
+		[
+			CFLAGS="-DCANOPUS_MC $CFLAGS"
+			echo " + Enable CANOPUS Media Converter"
+		])
+
+AC_CANONICAL_HOST
+
+case "$host_os" in
+ freebsd4*)
+    echo " + OS Type is FreeBSD 4.x"
+    CFLAGS="-I/usr/src/sys/ -DFREEBSD_4 $CFLAGS"
+    DVSEND_SRC="ieee1394-freebsd4.c"
+    DVSEND_LDADD="ieee1394-freebsd4.o"
+    DVSAVE_SRC="freebsd4.c"
+    DVSAVE_LDADD="freebsd4.o"
+    DVRECV_SRC="ieee1394-freebsd4.c write-freebsd4.c"
+    DVRECV_LDADD="ieee1394-freebsd4.o write-freebsd4.o"
+    DVPLAY_SRC="ieee1394-freebsd4.c"
+    DVPLAY_LDADD="ieee1394-freebsd4.o"
+    DVPLAY_LDFLAGS=""
+    ;;
+
+ freebsd5*)
+    echo " + OS Type is FreeBSD 5.x"
+    CFLAGS="-DFREEBSD_5 $CFLAGS"
+    DVSEND_SRC="ieee1394-freebsd5.c"
+    DVSEND_LDADD="ieee1394-freebsd5.o"
+    DVSAVE_SRC="freebsd5.c"
+    DVSAVE_LDADD="freebsd5.o"
+    DVRECV_SRC="ieee1394-freebsd5.c write-freebsd5.c"
+    DVRECV_LDADD="ieee1394-freebsd5.o write-freebsd5.o"
+    DVPLAY_SRC="ieee1394-freebsd5.c"
+    DVPLAY_LDADD="ieee1394-freebsd5.o"
+    DVPLAY_LDFLAGS=""
+    ;;
+
+ darwin1.3.*)
+    echo " + OS Type is MacOS X"
+    CFLAGS="-DMACOS_X $CFLAGS"
+
+    DVSEND_SRC="ieee1394-macosX.c"
+    DVSEND_LDADD="ieee1394-macosX.o"
+    DVSEND_LDFLAGS="-framework QuickTime -framework DVComponentGlue"
+    DVSAVE_SRC="macosX.c"
+    DVSAVE_LDADD="macosX.o"
+    DVSAVE_LDFLAGS="-framework QuickTime -framework DVComponentGlue"
+    DVRECV_SRC="ieee1394-macosX.c write-macosX.c"
+    DVRECV_LDADD="ieee1394-macosX.o write-macosX.o"
+    DVRECV_LDFLAGS="-framework QuickTime -framework DVComponentGlue"
+    DVPLAY_SRC="ieee1394-macosX.c"
+    DVPLAY_LDADD="ieee1394-macosX.o"
+    DVPLAY_LDFLAGS="-framework QuickTime -framework DVComponentGlue"
+    ;;
+
+ darwin5.*)
+    echo " + OS Type is MacOS X.1.x"
+    CFLAGS="-DMACOS_X $CFLAGS"
+
+    DVSEND_SRC="ieee1394-macosX.c"
+    DVSEND_LDADD="ieee1394-macosX.o"
+    DVSEND_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    DVSAVE_SRC="macosX.c"
+    DVSAVE_LDADD="macosX.o"
+    DVSAVE_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    DVRECV_SRC="ieee1394-macosX.c write-macosX.c"
+    DVRECV_LDADD="ieee1394-macosX.o write-macosX.o"
+    DVRECV_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    DVPLAY_SRC="ieee1394-macosX.c"
+    DVPLAY_LDADD="ieee1394-macosX.o"
+    DVPLAY_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    ;;
+
+ darwin6.*)
+    echo " + OS Type is MacOS X.2.x"
+    CFLAGS="-DMACOS_X $CFLAGS"
+
+    DVSEND_SRC="ieee1394-macosX.c"
+    DVSEND_LDADD="ieee1394-macosX.o"
+    DVSEND_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    DVSAVE_SRC="macosX.c"
+    DVSAVE_LDADD="macosX.o"
+    DVSAVE_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    DVRECV_SRC="ieee1394-macosX.c write-macosX.c"
+    DVRECV_LDADD="ieee1394-macosX.o write-macosX.o"
+    DVRECV_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    DVPLAY_SRC="ieee1394-macosX.c"
+    DVPLAY_LDADD="ieee1394-macosX.o"
+    DVPLAY_LDFLAGS="-framework QuickTime -framework DVComponentGlue -framework Carbon"
+    ;;
+
+ netbsd1.5*)
+    echo " + OS Type is NetBSD 1.5.x"
+    CFLAGS="-DNETBSD $CFLAGS"
+    DVSEND_SRC="ieee1394-netbsd.c"
+    DVSEND_LDADD="ieee1394-netbsd.o"
+    DVSAVE_SRC="netbsd.c"
+    DVSAVE_LDADD="netbsd.o"
+    DVRECV_SRC="ieee1394-netbsd.c write-netbsd.c"
+    DVRECV_LDADD="ieee1394-netbsd.o write-netbsd.o"
+    DVPLAY_SRC="ieee1394-netbsd.c"
+    DVPLAY_LDADD="ieee1394-netbsd.o"
+    DVPLAY_LDFLAGS=""
+    ;;
+
+ linux-gnu*)
+    echo " + OS Type is Linux"
+
+    AC_DVTS_CHECK_LINUX_SSFAMILY
+
+    CFLAGS="-DLINUX -DNO_SS_LEN $CFLAGS"
+
+    DVSEND_SRC="ieee1394-linux.c"
+    DVSEND_LDADD="ieee1394-linux.o"
+    DVSEND_LDFLAGS=""
+    DVSEND_INCLUDES="-I/usr/src/linux/drivers/ieee1394/"
+
+    DVSAVE_SRC="linux.c"
+    DVSAVE_LDADD="linux.o"
+    DVSAVE_LDFLAGS=""
+    DVSAVE_INCLUDES="-I/usr/src/linux/drivers/ieee1394/"
+
+    DVRECV_SRC="ieee1394-linux.c write-linux.c"
+    DVRECV_LDADD="ieee1394-linux.o write-linux.o"
+    DVRECV_LDFLAGS=""
+    DVRECV_INCLUDES="-I/usr/src/linux/drivers/ieee1394/"
+
+    DVPLAY_SRC="ieee1394-linux.c"
+    DVPLAY_LDADD="ieee1394-linux.o"
+    DVPLAY_LDFLAGS=""
+    DVPLAY_INCLUDES="-I/usr/src/linux/drivers/ieee1394/"
+    ;;
+
+ *) echo ""
+    echo "******************************************************"
+    echo "dvts currently does not support your operation system."
+    echo "******************************************************"
+    echo ""
+    echo "$host_os"
+    echo ""
+    exit;;
+esac
+
+AC_SUBST(DVSEND_SRC)
+AC_SUBST(DVSEND_LDADD)
+AC_SUBST(DVSEND_LDFLAGS)
+AC_SUBST(DVSEND_INCLUDES)
+
+AC_SUBST(DVRECV_SRC)
+AC_SUBST(DVRECV_LDADD)
+AC_SUBST(DVRECV_LDFLAGS)
+AC_SUBST(DVRECV_INCLUDES)
+
+AC_SUBST(DVSAVE_SRC)
+AC_SUBST(DVSAVE_LDADD)
+AC_SUBST(DVSAVE_LDFLAGS)
+AC_SUBST(DVSAVE_INCLUDES)
+
+AC_SUBST(DVPLAY_SRC)
+AC_SUBST(DVPLAY_LDADD)
+AC_SUBST(DVPLAY_LDFLAGS)
+AC_SUBST(DVPLAY_INCLUDES)
+
+AC_OUTPUT(Makefile dvsend/Makefile dvrecv/Makefile dvplay/Makefile dvsave/Makefile)

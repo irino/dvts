@@ -1,0 +1,80 @@
+.TH DVRECV 1 "2001 June 19"
+.UC 4
+.SH NAME
+dvrecv \- Receive DV/RTP packets and output to IEEE1394
+.SH SYNOPSIS
+.B dvrecv
+[
+.I -v64LH
+] [
+.I -j group
+] [
+.I -M ifname
+] [
+.I -P port
+] [
+.I -D dev
+] [
+.I -l number
+]
+.br
+.SH DESCRIPTION
+.I dvrecv
+is part of the DVTS(Digital Video Transport System).
+.I dvrecv
+receives DV/RTP packets and sends it out to an IEEE1394 interface.
+.SH OPTIONS
+The options are as follows:
+.TP
+.BI \-v
+Show version number of
+.I dvrecv
+.TP
+.BI \-6 
+Use IPv6 for receiving DV/RTP packets. (default)
+.TP
+.BI \-4
+Use IPv4 for receiving DV/RTP packets.
+.TP
+.BI \-L
+Show number of packet loss.
+.TP
+.BI \-H
+Show the help message.
+.TP
+.BI \-j " group"
+Join multicast group "group".
+.br
+Example) dvrecv -j 239.100.100.100
+.TP
+.BI \-M " ifname"
+Use interface "ifname" for receiving multicast packets.
+.br
+Example) dvrecv -j 239.100.100.100 -M fxp0
+.TP
+.BI \-P " port"
+Use port for receiving DV/RTP packets. (default value is 8000).
+.br
+Example) dvrecv -P 8100
+.TP
+.BI \-D " dev"
+Use device "dev" for IEEE1394 output. (default value is "/dev/dv0").
+.br
+Example) dvrecv -D /dev/dv0
+.TP
+.BI \-l " number"
+Show number of packet loss. Also specify the packet loss number display granularity.
+The "number" shows the number of packets that is needed to be received by the dvrecv to display the packet loss information.
+For example, if the "number" is 3000, dvrecv will display the number of packet loss after receiving 3000 DV/RTP packets.
+.PP
+.SH BUGS
+If you find a bug, please send a e-mail to akimichi@sfc.wide.ad.jp.
+Thank you very much.
+.SH AUTHORS
+Copyright (c) 1999-2003 WIDE Project(http://www.wide.ad.jp/).
+.br
+.I dvrecv
+was written by Akimichi OGAWA of Keio university, JAPAN.
+DVTS home page (http://www.sfc.wide.ad.jp/DVTS/)
+.SH SEE ALSO
+dvts(1), dvsend(1), dvsave(1), dvplay(1)

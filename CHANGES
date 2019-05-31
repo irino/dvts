@@ -1,0 +1,20 @@
+March 2001
+	Whole code renewed from full scratch.
+	Cleaned up the code.
+
+	dvsave is added
+		dvsave will save dv data from IEEE1394 device.
+	dvplay is added
+		dvplay will read a dv data file and output
+		the data to IEEE1394 device.
+
+	dvproxy is added
+		dvproxy will proxy DV/RTP streams.
+
+	dvsend, dvrecv : DEFAULT UDP PORT NUMBER CHANGED TO 8000.
+	dvsend, dvrecv : IPv6 is default now.
+			can use IPv4 by using the option "-4".
+	dvsend : Default IEEE1394 interface changed to "ohci0".
+	dvsend : Default DIF block in one packet changed from 6 -> 17.
+
+	Comments are appreciated.

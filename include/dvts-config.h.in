@@ -1,0 +1,60 @@
+/* include/dvts-config.h.in.  Generated automatically from configure.in by autoheader.  */
+/* Define if your system supports ipv6. */
+#undef	ENABLE_INET6
+
+/* Define if your system supports X11. */
+#undef	HAVE_X11
+
+/* Define if your system has libraw1394 (Linux) */
+#undef	HAVE_LINUX_LIBRAW1394
+
+/* Define if you want to use dv1394 (Linux) */
+#undef	HAVE_LINUX_DV1394
+
+/* Define if you want to use dv1394 (Linux) */
+#undef	USE_LINUX_DV1394
+
+/* Define if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define if you have the `getnameinfo' function. */
+#undef HAVE_GETNAMEINFO
+
+/* Define if you have the `gettimeofday' function. */
+#undef HAVE_GETTIMEOFDAY
+
+/* Define if you have the `nsl' library (-lnsl). */
+#undef HAVE_LIBNSL
+
+/* Define if you have the `socket' library (-lsocket). */
+#undef HAVE_LIBSOCKET
+
+/* Define if you have the `socket' function. */
+#undef HAVE_SOCKET
+
+/* Define if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define if you have the <sys/ioctl.h> header file. */
+#undef HAVE_SYS_IOCTL_H
+
+/* Define if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define as the return type of signal handlers (`int' or `void'). */
+#undef RETSIGTYPE
+
+/* Define if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define if you can safely include both <sys/time.h> and <time.h>. */
+#undef TIME_WITH_SYS_TIME
+
+/* Version number of package */
+#undef VERSION

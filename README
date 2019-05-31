@@ -1,0 +1,20 @@
+INSTALL
+  gmake is required to compile dvts.
+  Simply type the command './configure' and 'gmake' in this directory.
+  Then, type 'make install'. This will install dvsend in '/usr/local/bin/'.
+
+DEVEOPMENT
+  autoconf, autoheader and automake is required for development.
+  Use the following commands to automatically create the script 'configure'.
+    aclocal -I ac-macros
+    autoconf
+
+BUG REPORT
+  If you find a bug, please send an e-mail to "akimichi@sfc.wide.ad.jp".
+  Thank you.
+
+FURTHER INFORMATION
+  http://www.sfc.wide.ad.jp/DVTS/
+
+COPYRIGHT
+  SEE COPYING
